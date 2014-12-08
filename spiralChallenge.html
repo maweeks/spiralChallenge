@@ -1,0 +1,81 @@
+<!doctype html>
+<html>
+    <head>
+        <title> Spiral Arrays </title>
+        <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+    </head>
+    <body>
+        <script>
+            // Write a function that takes two numbers, which represents
+            // number of rows and columns for a two dimensional array,
+            // and fills the array with a sequence of numbers in the spiral fashion.
+            //
+            // e.g.
+            //
+            // input: 5, 5
+            //
+            // output: [[ 0,  1,  2,  3, 4],
+            //          [15, 16, 17, 18, 5],
+            //          [14, 23, 24, 19, 6],
+            //          [13, 22, 21, 20, 7],
+            //          [12, 11, 10,  9, 8]]
+            function spiral(row, column) {
+                if (row > 0 && column > 0) {
+                    var outputArray = [];
+
+                    for (var j = 0; j < column; j++) {
+                        outputArray[j] = [];
+
+                        for (var i = 0; i < row; i++) {
+                            //topMiddle
+                            if (((i + 1) >= j) && (j < column/2) && ((i + j) < row)) {
+                                outputArray[j][i] = i + (j*((2*(row+column))-5));
+                            }
+                            //bottomMiddle
+                            else if (((i + j) >= column - 1) && (j >= (column - 1)/2) && ((row - i) > (column - j))) {
+                                outputArray[j][i] = 7;
+                            }
+                            //right
+                            else if (i >= ((row-1) / 2)) {
+                                outputArray[j][i] = 8;
+                            }
+                            //left
+                            else {
+                                outputArray[j][i] = 9;
+                            }
+                        }
+                    }
+                }
+                return outputArray;
+            }
+            function printTable(array) {
+                var htmlOutput = "<table>"
+                for (var j = 0; j < array.length; j++) {
+                    htmlOutput += "<tr>"
+                    for (var i = 0; i < array[0].length; i++) {
+                        htmlOutput += "<td>" + array[j][i] + "</td>";
+                    }
+                    htmlOutput += "</tr>"
+                }
+                htmlOutput += "</table><br/><br/>"
+                console.log(htmlOutput);
+                $('body').append(htmlOutput);
+            }
+
+            console.log(spiral(3, 3));
+            console.log(spiral(3, 5));
+            console.log(spiral(5, 3));
+            console.log(spiral(5, 5));
+            console.log(spiral(6, 6));
+
+            printTable(spiral(4, 4));
+            printTable(spiral(5, 5));
+            printTable(spiral(6, 6));
+            printTable(spiral(7, 7));
+            printTable(spiral(8, 8));
+            printTable(spiral(3, 4));
+            printTable(spiral(4, 5));
+            printTable(spiral(5, 6));
+        </script>
+    </body>
+</html>
